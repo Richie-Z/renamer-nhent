@@ -55,10 +55,4 @@ def main():
         os.rename(path[k], fixedName(item, getTitle(item)))
 
 
-def coba():
-    fixed, path = getFile()
-    for k, item in enumerate(fixed):
-        print(k, item)
-
-
-coba()
+main()
