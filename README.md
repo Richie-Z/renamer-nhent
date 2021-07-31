@@ -3,7 +3,7 @@
 This script gonna rename your fav doujin.
 
 > **example**. <br>
-177013-[your-downloader-info].cbz => 177013 - Metamormofis.cbz
+177013-[your-downloader-info].cbz => 177013 - METAMORPHOSIS.cbz
 
 
 ### How to use it 
