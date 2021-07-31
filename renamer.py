@@ -3,8 +3,9 @@ from bs4 import BeautifulSoup
 import glob
 import os
 
-FOLDER = "D:/nsf/2d/Story/Nhentai/testing/"
-PREFIX = "-[cin.cin.pw]"
+FOLDER = "D:/nsf/2d/Story/Nhentai/unprefix/"
+PREFIX = ""
+EXT = ".cbz"
 
 
 def getTitle(id):
@@ -18,25 +19,29 @@ def getTitle(id):
 
 
 def getFile():
-    FOLDER_NAME = FOLDER + "*.cbz"
+    FOLDER_NAME = FOLDER + "*" + EXT
     fixed = []
     path = []
     file = glob.glob(FOLDER_NAME)
     for item in file:
         fileName = os.path.basename(item)
-        if PREFIX in fileName:
+        if PREFIX != "" and PREFIX in fileName:
+            path.append(item)
+            fixed.append(renameFile(fileName))
+        if PREFIX == "" and len(fileName) <= 10:
             path.append(item)
             fixed.append(renameFile(fileName))
     return (fixed, path)
 
 
 def renameFile(item):
-    edited = item.split(PREFIX[0])
+    prefix = PREFIX[0] if PREFIX != "" else "."
+    edited = item.split(prefix)
     return edited[0]
 
 
 def fixedName(id, name):
-    return os.path.join(FOLDER + id + " - " + validString(name) + ".cbz")
+    return os.path.join(FOLDER + id + " - " + validString(name) + EXT)
 
 
 def validString(name):
@@ -50,4 +55,10 @@ def main():
         os.rename(path[k], fixedName(item, getTitle(item)))
 
 
-main()
+def coba():
+    fixed, path = getFile()
+    for k, item in enumerate(fixed):
+        print(k, item)
+
+
+coba()
