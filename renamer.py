@@ -4,7 +4,7 @@ import glob
 import os
 
 FOLDER = "D:/nsf/2d/Story/Nhentai/testing/"
-PREFIX = "[cin.cin.pw]"
+PREFIX = "-[cin.cin.pw]"
 
 
 def getTitle(id):
@@ -24,19 +24,24 @@ def getFile():
     file = glob.glob(FOLDER_NAME)
     for item in file:
         fileName = os.path.basename(item)
-        if "-"+PREFIX in fileName:
+        if PREFIX in fileName:
             path.append(item)
             fixed.append(renameFile(fileName))
     return (fixed, path)
 
 
 def renameFile(item):
-    edited = item.split("-")
+    edited = item.split(PREFIX[0])
     return edited[0]
 
 
 def fixedName(id, name):
-    return os.path.join(FOLDER + id + " - " + name + ".cbz")
+    return os.path.join(FOLDER + id + " - " + validString(name) + ".cbz")
+
+
+def validString(name):
+    filename = "".join(i for i in name if i not in '\/:*?<>|"')
+    return filename
 
 
 def main():
