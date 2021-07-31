@@ -3,8 +3,8 @@ from bs4 import BeautifulSoup
 import glob
 import os
 
-FOLDER = "D:/nsf/2d/Story/Nhentai/unprefix/"
-PREFIX = ""
+FOLDER = "D:/nhent/"
+PREFIX = "-[your-prefix]"
 EXT = ".cbz"
 
 
@@ -52,6 +52,7 @@ def validString(name):
 def main():
     fixed, path = getFile()
     for k, item in enumerate(fixed):
+        print((k + 1), "/", len(fixed))
         os.rename(path[k], fixedName(item, getTitle(item)))
 
 
